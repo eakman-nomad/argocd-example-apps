@@ -12,6 +12,7 @@ spec:
       - name: sleep
         image: curlimages/curl
         command:
+            - sleep 10
             - "curl"
             - '-H "Accept: application/vnd.github.v3+json"'
             - '-H "Authorization: Token ${GITHUB_ACCESS_TOKEN}"'
