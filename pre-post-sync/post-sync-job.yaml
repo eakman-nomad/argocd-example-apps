@@ -10,14 +10,20 @@ spec:
     spec:
       containers:
       - name: sleep
-        image: curlimages/curl
+        image: alpine:latest
         command:
-            - sleep 10
-            - "curl"
-            - '-H "Accept: application/vnd.github.v3+json"'
-            - '-H "Authorization: Token ${GITHUB_ACCESS_TOKEN}"'
-            - '-X POST'
-            - "https://api.github.com/repos/eakman-nomad/argocd-example-apps/deployments"
-            - -d '{"ref":"master"}'
+            - "sleep"
+            - "10"
+            - "sh"
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              curl \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: Token ${GITHUB_ACCESS_TOKEN}" \
+              -X POST \
+              https://api.github.com/repos/eakman-nomad/argocd-example-apps/deployments \
+              -d '{"ref":"master"}'
+              EOF
       restartPolicy: Never
   backoffLimit: 0
