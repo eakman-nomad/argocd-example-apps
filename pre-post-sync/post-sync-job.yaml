@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: sleep
-        image: alpine:latest
+        image: curlimages/curl
         command:
             - "sleep"
             - "10"
