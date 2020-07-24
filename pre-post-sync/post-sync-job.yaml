@@ -10,13 +10,13 @@ spec:
     spec:
       containers:
       - name: sleep
-        image: alpine:latest
-        command: |
-            curl \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Token ${GITHUB_ACCESS_TOKEN}" \
-            -X POST \
-            https://api.github.com/repos/eakman-nomad/argocd-example-apps/deployments \
-            -d '{"ref":"master"}'
+        image: curlimages/curl
+        command:
+            - "curl"
+            - '-H "Accept: application/vnd.github.v3+json"'
+            - '-H "Authorization: Token ${GITHUB_ACCESS_TOKEN}"'
+            - '-X POST'
+            - "https://api.github.com/repos/eakman-nomad/argocd-example-apps/deployments"
+            - -d '{"ref":"master"}'
       restartPolicy: Never
   backoffLimit: 0
